@@ -33,7 +33,7 @@ If `ot.otel.exporter=jaeger`, the following parameters apply to the Jaeger expor
 The <ins>[OpenTracing SpecialAgent](https://github.com/opentracing-contrib/java-specialagent)</ins> automatically instruments 3rd-party libraries in Java applications. Starting with <ins>SpecialAgent v1.5.2</ins>, the <ins>OpenTelemetry Tracer Bridge</ins> is included as a [<ins>Tracer Plugin</ins>](https://github.com/opentracing-contrib/java-specialagent/#62-tracer-plugins), which allows traces to be sent to OpenTelemetry tracers. The <ins>OpenTelemetry Tracer Bridge</ins> can be enabled with the `-Dsa.tracer=otel` property:
 
 ```bash
-java -javaagent:opentracing-specialagent-1.5.2.jar \
+java -javaagent:opentracing-specialagent-1.5.3.jar \
      -Dsa.tracer=otel \
      -Dot.otel.exporter=jaeger \
      -Dot.otel.exporter.jaeger.serviceName=myService \
