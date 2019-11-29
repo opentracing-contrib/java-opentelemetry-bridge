@@ -3,6 +3,9 @@
 > OpenTracing Bridge for OpenTelemetry Tracers
 
 [![Build Status](https://travis-ci.org/opentracing-contrib/java-opentelemetry-bridge.svg?branch=master)](https://travis-ci.org/opentracing-contrib/java-opentelemetry-bridge)
+[![Coverage Status](https://coveralls.io/repos/github/opentracing-contrib/java-opentelemetry-bridge/badge.svg?branch=master)](https://coveralls.io/github/opentracing-contrib/java-opentelemetry-bridge?branch=master)
+[![Javadocs](https://www.javadoc.io/badge/io.opentracing.contrib/opentelemetry-bridge.svg)](https://www.javadoc.io/doc/io.opentracing.contrib/opentelemetry-bridge)
+[![Released Version](https://img.shields.io/maven-central/v/io.opentracing.contrib/specialagent.svg)](https://mvnrepository.com/artifact/io.opentracing.contrib/opentelemetry-bridge)
 
 The <ins>OpenTelemetry Tracer Bridge</ins> is a <ins>Tracer Plugin</ins> that uses the [OpenTelemetry OpenTracing Shim](https://github.com/open-telemetry/opentelemetry-java) to provide a `TracerFactory` implementation (specified by the [OpenTracing TracerResolver](https://github.com/opentracing-contrib/java-tracerresolver)).
 
