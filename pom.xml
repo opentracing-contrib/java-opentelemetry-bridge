@@ -20,7 +20,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.opentracing.contrib</groupId>
   <artifactId>opentelemetry-bridge</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0-SNAPSHOT</version>
   <name>Java OpenTelemetry Bridge</name>
   <description>OpenTracing Bridge for OpenTelemetry Tracers</description>
   <url>https://github.com/opentracing-contrib/java-opentelemetry-bridge</url>
