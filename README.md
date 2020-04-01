@@ -7,7 +7,7 @@
 [![Javadocs](https://www.javadoc.io/badge/io.opentracing.contrib/opentelemetry-bridge.svg)](https://www.javadoc.io/doc/io.opentracing.contrib/opentelemetry-bridge)
 [![Released Version](https://img.shields.io/maven-central/v/io.opentracing.contrib/opentelemetry-bridge.svg)](https://mvnrepository.com/artifact/io.opentracing.contrib/opentelemetry-bridge)
 
-The <ins>OpenTelemetry Tracer Bridge</ins> is a <ins>Tracer Plugin</ins> that uses the [OpenTelemetry OpenTracing Shim](https://github.com/open-telemetry/opentelemetry-java) to provide a `TracerFactory` implementation (specified by the [OpenTracing TracerResolver](https://github.com/opentracing-contrib/java-tracerresolver)).
+The <ins>OpenTelemetry Tracer Bridge</ins> is a <ins>Trace Exporter</ins> that uses the [OpenTelemetry OpenTracing Shim](https://github.com/open-telemetry/opentelemetry-java) to provide a `TracerFactory` implementation (specified by the [OpenTracing TracerResolver](https://github.com/opentracing-contrib/java-tracerresolver)).
 
 Tracer parameters can be configured via the system properties:
 
@@ -30,7 +30,7 @@ If `ot.otel.exporter=jaeger`, the following parameters apply to the Jaeger expor
 
 ## Usage with SpecialAgent
 
-The <ins>[OpenTracing SpecialAgent](https://github.com/opentracing-contrib/java-specialagent)</ins> automatically instruments 3rd-party libraries in Java applications. Starting with <ins>SpecialAgent v1.5.2</ins>, the <ins>OpenTelemetry Tracer Bridge</ins> is included as a [<ins>Tracer Plugin</ins>](https://github.com/opentracing-contrib/java-specialagent/#62-tracer-plugins), which allows traces to be sent to OpenTelemetry tracers. The <ins>OpenTelemetry Tracer Bridge</ins> can be enabled with the `-Dsa.tracer=otel` property:
+The <ins>[OpenTracing SpecialAgent](https://github.com/opentracing-contrib/java-specialagent)</ins> automatically instruments 3rd-party libraries in Java applications. Starting with <ins>SpecialAgent v1.5.2</ins>, the <ins>OpenTelemetry Tracer Bridge</ins> is included as a [<ins>Trace Exporter</ins>](https://github.com/opentracing-contrib/java-specialagent/#42-trace-exporters), which allows traces to be sent to OpenTelemetry tracers. The <ins>OpenTelemetry Tracer Bridge</ins> can be enabled with the `-Dsa.tracer=otel` property:
 
 ```bash
 java -javaagent:opentracing-specialagent-1.5.2.jar \
