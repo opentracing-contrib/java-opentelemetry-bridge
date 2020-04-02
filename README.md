@@ -30,11 +30,11 @@ If `ot.otel.exporter=jaeger`, the following parameters apply to the Jaeger expor
 
 ## Usage with SpecialAgent
 
-The <ins>[OpenTracing SpecialAgent](https://github.com/opentracing-contrib/java-specialagent)</ins> automatically instruments 3rd-party libraries in Java applications. Starting with <ins>SpecialAgent v1.5.2</ins>, the <ins>OpenTelemetry Tracer Bridge</ins> is included as a [<ins>Trace Exporter</ins>](https://github.com/opentracing-contrib/java-specialagent/#42-trace-exporters), which allows traces to be sent to OpenTelemetry tracers. The <ins>OpenTelemetry Tracer Bridge</ins> can be enabled with the `-Dsa.tracer=otel` property:
+The <ins>[OpenTracing SpecialAgent](https://github.com/opentracing-contrib/java-specialagent)</ins> automatically instruments 3rd-party libraries in Java applications. Starting with <ins>SpecialAgent v1.5.2</ins> (usage updated to spec of <ins>SpecialAgent v1.7.0</ins>), the <ins>OpenTelemetry Tracer Bridge</ins> is included as a [<ins>Trace Exporter</ins>](https://github.com/opentracing-contrib/java-specialagent/#42-trace-exporters), which allows traces to be sent to OpenTelemetry tracers. The <ins>OpenTelemetry Tracer Bridge</ins> can be enabled with the `-Dsa.exporter=otel` property:
 
 ```bash
-java -javaagent:opentracing-specialagent-1.5.2.jar \
-     -Dsa.tracer=otel \
+java -javaagent:opentracing-specialagent-1.7.0.jar \
+     -Dsa.exporter=otel \
      -Dot.otel.exporter=jaeger \
      -Dot.otel.exporter.jaeger.serviceName=myService \
      -Dot.otel.exporter.jaeger.address=127.0.0.1:1234 \
