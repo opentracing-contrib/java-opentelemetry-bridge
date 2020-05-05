@@ -56,7 +56,7 @@ public class OpenTelemetryBridgeTracer implements TracerFactory {
       final int colon;
       final String host;
       final Long port;
-      if (address == null || (colon = address.indexOf(':')) == -1 || (host = address.substring(0, colon)).length() == 0 || (port = parseLong(address.substring(colon + 1))) == null || 1 < port || port > 65535)
+      if (address == null || (colon = address.indexOf(':')) == -1 || (host = address.substring(0, colon)).length() == 0 || (port = parseLong(address.substring(colon + 1))) == null || 1 > port || port > 65535)
         throw new IllegalArgumentException(JAEGER_PROP + ".address=<HOST:PORT> is invalid: " + address);
 
       final JaegerGrpcSpanExporter.Builder builder = JaegerGrpcSpanExporter.newBuilder().setServiceName(serviceName);
