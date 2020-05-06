@@ -81,7 +81,7 @@ public class OpenTelemetryBridgeTracer implements TracerFactory {
       return TraceShim.createTracerShim();
     }
 
-    final String reportOnlySampled = System.getProperty(JAEGER_PROP + ".reportOnlySampled");
+    final String reportOnlySampled = System.getProperty(EXPORTER_PROP + ".reportOnlySampled");
     if (reportOnlySampled != null)
       System.setProperty("otel.ssp.export.sampled", reportOnlySampled);
 
