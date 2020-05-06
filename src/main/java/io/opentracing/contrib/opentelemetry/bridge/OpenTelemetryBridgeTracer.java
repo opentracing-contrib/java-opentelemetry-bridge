@@ -18,10 +18,10 @@ package io.opentracing.contrib.opentelemetry.bridge;
 import io.grpc.ManagedChannelBuilder;
 import io.opentelemetry.exporters.inmemory.InMemorySpanExporter;
 import io.opentelemetry.exporters.jaeger.JaegerGrpcSpanExporter;
-import io.opentelemetry.exporters.logging.LoggingExporter;
+import io.opentelemetry.exporters.logging.LoggingSpanExporter;
 import io.opentelemetry.opentracingshim.TraceShim;
-import io.opentelemetry.sdk.distributedcontext.DistributedContextManagerSdk;
-import io.opentelemetry.sdk.trace.TracerSdkFactory;
+import io.opentelemetry.sdk.correlationcontext.CorrelationContextManagerSdk;
+import io.opentelemetry.sdk.trace.TracerSdkProvider;
 import io.opentelemetry.sdk.trace.export.SimpleSpansProcessor;
 import io.opentelemetry.sdk.trace.export.SpanExporter;
 import io.opentracing.Tracer;
@@ -64,7 +64,7 @@ public class OpenTelemetryBridgeTracer implements TracerFactory {
 
       final Long deadline = parseLong(System.getProperty(JAEGER_PROP + ".deadline"));
       if (deadline != null)
-        builder.setDeadline(deadline);
+        builder.setDeadlineMs(deadline);
 
       exporter = builder.build();
     }
@@ -72,7 +72,7 @@ public class OpenTelemetryBridgeTracer implements TracerFactory {
       exporter = InMemorySpanExporter.create();
     }
     else if ("logging".equals(exporterProperty)) {
-      exporter = new LoggingExporter();
+      exporter = new LoggingSpanExporter();
     }
     else if (exporterProperty != null) {
       throw new UnsupportedOperationException("Unsupported " + EXPORTER_PROP + "=" + exporterProperty);
@@ -81,10 +81,15 @@ public class OpenTelemetryBridgeTracer implements TracerFactory {
       return TraceShim.createTracerShim();
     }
 
-    final boolean reportOnlySampled = Boolean.getBoolean(JAEGER_PROP + ".reportOnlySampled");
-    final TracerSdkFactory factory = TracerSdkFactory.create();
-    factory.addSpanProcessor(SimpleSpansProcessor.newBuilder(exporter).reportOnlySampled(reportOnlySampled).build());
+    final String reportOnlySampled = System.getProperty(JAEGER_PROP + ".reportOnlySampled");
+    if (reportOnlySampled != null)
+      System.setProperty("otel.ssp.export.sampled", reportOnlySampled);
 
-    return TraceShim.createTracerShim(factory, new DistributedContextManagerSdk());
+    final SimpleSpansProcessor.Config config = SimpleSpansProcessor.Config.loadFromDefaultSources();
+
+    final TracerSdkProvider provider = TracerSdkProvider.builder().build();
+    provider.addSpanProcessor(SimpleSpansProcessor.create(exporter, config));
+
+    return TraceShim.createTracerShim(provider, new CorrelationContextManagerSdk());
   }
 }
